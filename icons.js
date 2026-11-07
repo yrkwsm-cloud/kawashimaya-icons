@@ -15,10 +15,25 @@ const face = (cx, cy, s = 1, ink = INK) => `${C(cx - 7 * s, cy, 2.6 * s, ink)}${
   + `${C(cx - 11.5 * s, cy + 5 * s, 2.8 * s, "#FF9AA8")}${C(cx + 11.5 * s, cy + 5 * s, 2.8 * s, "#FF9AA8")}`
   + `<path d="M${cx - 3.5 * s} ${cy + 5 * s} q${3.5 * s} ${3.5 * s} ${7 * s} 0" fill="none" stroke="${ink}" stroke-width="${2.2 * s}" stroke-linecap="round"/>`;
 
-// [名前, 上の色, 下の色, 記号, 説明]
+// 5アプリ（pia・kura・en・nami・kaze）の本体アイコン（2026-11-07 河島さん「共通したトーンで、シンプルで洗練されたシンボルに」）。
+//   無地の角丸タイル＋白い線1本の記号。線の太さ・余白・角丸を5つでそろえる。色はアプリ切り替えの色と同じ
+const L = (d, w = 5.5) => S(d, w);
+const APP = {
+  pia:  ["#F2994A", `<circle cx="32" cy="32" r="18" fill="none" stroke="${W}" stroke-width="5.5"/>` + L("M32 22v10l7 5")],
+  kura: ["#C98A2B", L("M10 27l7-11h30l7 11z") + L("M17 27v23h30V27") + L("M17 38h30", 4)],
+  en:   ["#D9668C", `<circle cx="25" cy="32" r="12" fill="none" stroke="${W}" stroke-width="5.5"/><circle cx="39" cy="32" r="12" fill="none" stroke="${W}" stroke-width="5.5"/>`],
+  nami: ["#2E9C78", L("M11 26c5-6 9-6 14 0s9 6 14 0 9-6 14 0") + L("M11 40c5-6 9-6 14 0s9 6 14 0 9-6 14 0")],
+  kaze: ["#3E73C2", L("M11 26h26a7 7 0 1 0-7-7") + L("M11 37h32a7 7 0 1 1-7 7") ],
+};
+
+// [名前, 上の色, 下の色, 記号, 説明, 無地]
 const ICONS = [
+  // ---- 5アプリの本体 ----
+  ["en", APP.en[0], APP.en[0], APP.en[1], "en（メール配信）", 1],
+  ["nami", APP.nami[0], APP.nami[0], APP.nami[1], "nami（発信）", 1],
+  ["kaze", APP.kaze[0], APP.kaze[0], APP.kaze[1], "kaze（広告）", 1],
   // ---- PIA 本体と機能（?tab=） ----
-  ["pia", "#FF9A7A", "#FF6A4D", C(32, 36, 19) + face(32, 37, 1) + F("M32 17c-2-6 2-11 9-11-1 6-4 10-9 11z", "#7CC9AE") + S("M32 17v-3", 3), "PIA（本体）"],
+  ["pia", APP.pia[0], APP.pia[0], APP.pia[1], "PIA（本体）", 1],
   ["pia-dandori", "#FFAE73", "#FF8A4C", R(13, 16, 38, 34, 7) + R(13, 16, 38, 10, 7, "#FFE2CC") + R(19, 10, 5, 11, 2.5) + R(40, 10, 5, 11, 2.5) + [0, 1, 2].map((i) => [0, 1].map((j) => R(19 + i * 10, 31 + j * 9, 6, 5, 1.5, "#FF8A4C")).join("")).join(""), "スケジュール"],
   ["pia-nippo", "#FFC857", "#F5A623", R(14, 12, 30, 40, 6) + [22, 30, 38].map((y) => R(20, y, 18, 3, 1.5, "#F5A623")).join("") + `<g transform="rotate(40 44 34)">${R(40, 14, 9, 30, 3, "#FF6A4D")}${F("M40 44h9l-4.5 8z", "#FFE2CC")}</g>`, "日報"],
   ["pia-track", "#FF8585", "#F2545B", C(32, 36, 18) + C(32, 36, 13, "#F2545B") + R(28, 9, 8, 8, 2.5) + S("M32 36V27M32 36l6 4", 4.5), "計測"],
@@ -42,7 +57,7 @@ const ICONS = [
   ["pia-make", "#BCA3EE", "#9071DB", R(26, 8, 12, 8, 2.5) + F("M24 16h16v6c6 3 9 8 9 14v12a6 6 0 0 1-6 6H21a6 6 0 0 1-6-6V36c0-6 3-11 9-14z") + R(19, 34, 26, 12, 3, "#9071DB") + face(32, 38, 0.45, W), "製造数（メイカ）"],
   ["pia-okr", "#7FCFC4", "#3FA597", R(15, 9, 5, 46, 2.5) + F("M20 12h26l-6 9 6 9H20z"), "目標ボード"],
   // ---- KURA 本体と各タブ（?v=） ----
-  ["kura", "#2FA394", "#17766B", F("M32 8L8 24h48z") + R(13, 24, 38, 30, 3) + R(13, 24, 38, 5, 1, "#CFE9E4") + face(32, 39, 0.9) + R(17, 47, 30, 3, 1.5, "#CFE9E4"), "KURA（本体）"],
+  ["kura", APP.kura[0], APP.kura[0], APP.kura[1], "KURA（本体）", 1],
   ["kura-home", "#3DB3A2", "#1F8C7E", F("M32 10L9 30h7v21h32V30h7z") + R(27, 37, 10, 14, 3, "#1F8C7E"), "ホーム"],
   ["kura-list", "#5FAE96", "#2F8A72", F("M10 22l22-10 22 10v24L32 56 10 46z") + F("M10 22l22 10 22-10", "#D6EEE5") + S("M32 32v24", 3).replace(W, "#2F8A72"), "原価一覧"],
   ["kura-zure", "#6AA8E0", "#3B7FC4", C(28, 28, 16) + C(28, 28, 10.5, "#3B7FC4") + S("M40 40l12 12", 8) + S("M23 28h10", 3.5), "ずれ一覧"],
@@ -56,9 +71,9 @@ const ICONS = [
   ["kura-req", "#F7D06A", "#E5AE2A", F("M32 8a16 16 0 0 1 9 29v6H23v-6a16 16 0 0 1 9-29z") + R(23, 46, 18, 4, 2) + R(26, 52, 12, 4, 2) + face(32, 24, 0.5, "#B07A0A"), "改良リクエスト"],
 ];
 
-const svg = ([name, c1, c2, glyph]) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">`
-  + `<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>`
-  + `<rect x="1" y="1" width="62" height="62" rx="15" fill="url(#g)"/><rect x="1" y="1" width="62" height="30" rx="15" fill="#fff" opacity=".10"/>${glyph}</svg>`;
+const svg = ([name, c1, c2, glyph, , flat]) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">`
+  + (flat ? `<rect x="1" y="1" width="62" height="62" rx="15" fill="${c1}"/>` : `<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs>`
+  + `<rect x="1" y="1" width="62" height="62" rx="15" fill="url(#g)"/><rect x="1" y="1" width="62" height="30" rx="15" fill="#fff" opacity=".10"/>`) + `${glyph}</svg>`;
 
 if (require.main === module) {
   const dir = path.join(__dirname, "svg"); fs.mkdirSync(dir, { recursive: true });
@@ -69,7 +84,7 @@ body{font-family:"Yu Gothic UI",Meiryo,sans-serif;background:#FBFAF7;margin:24px
 .g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.c{background:#fff;border-radius:14px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .row{display:flex;align-items:flex-end;gap:10px}b{display:block;margin-top:8px;font-size:15px}small{color:#999;font-size:11px}
 .tabs{display:flex;gap:4px;background:#DEE1E6;padding:8px 8px 0;border-radius:10px 10px 0 0;flex-wrap:wrap}.t{background:#fff;border-radius:8px 8px 0 0;padding:7px 10px;font-size:12px;display:flex;gap:6px;align-items:center;width:130px}
-</style><h2>ブラウザのタブでの見え方（16px）</h2><div class="tabs">${ICONS.slice(0, 12).map((ic) => `<div class="t"><img src="svg/${ic[0]}.svg" width="16">${ic[4]}</div>`).join("")}</div>
+</style><h2>5アプリ</h2><div class="tabs">${["pia","kura","en","nami","kaze"].map((n) => ICONS.find((i) => i[0] === n)).map((ic) => `<div class="t"><img src="svg/${ic[0]}.svg" width="16">${ic[4]}</div>`).join("")}</div><div class="g" style="grid-template-columns:repeat(5,1fr);margin-top:14px">${["pia","kura","en","nami","kaze"].map((n) => cell(ICONS.find((i) => i[0] === n))).join("")}</div><h2>ブラウザのタブでの見え方（16px）</h2><div class="tabs">${ICONS.slice(3, 15).map((ic) => `<div class="t"><img src="svg/${ic[0]}.svg" width="16">${ic[4]}</div>`).join("")}</div>
 <h2>PIA</h2><div class="g">${ICONS.filter((i) => i[0].startsWith("pia")).map(cell).join("")}</div>
 <h2>KURA</h2><div class="g">${ICONS.filter((i) => i[0].startsWith("kura")).map(cell).join("")}</div>`);
   console.log("svg", ICONS.length);
