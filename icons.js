@@ -18,12 +18,13 @@ const face = (cx, cy, s = 1, ink = INK) => `${C(cx - 7 * s, cy, 2.6 * s, ink)}${
 // 5アプリ（pia・kura・en・nami・kaze）の本体アイコン（2026-11-07 河島さん「共通したトーンで、シンプルで洗練されたシンボルに」）。
 //   無地の角丸タイル＋白い線1本の記号。線の太さ・余白・角丸を5つでそろえる。色はアプリ切り替えの色と同じ
 const L = (d, w = 5.5) => S(d, w);
+// 2026-11-07夜 河島さん「もうちょっとシンプルに」→ 案から選択：PIA＝C（弧と点）・KURA＝A（家の輪郭）・en＝そのまま・nami＝B（塗りの波）・kaze＝B（丸い棒3本）。比較は candidates.js
 const APP = {
-  pia:  ["#F2994A", `<circle cx="32" cy="32" r="18" fill="none" stroke="${W}" stroke-width="5.5"/>` + L("M32 22v10l7 5")],
-  kura: ["#C98A2B", L("M10 27l7-11h30l7 11z") + L("M17 27v23h30V27") + L("M17 38h30", 4)],
+  pia:  ["#F2994A", `<path d="M32 14a18 18 0 1 1-18 18" fill="none" stroke="${W}" stroke-width="6.5" stroke-linecap="round"/>` + C(32, 32, 5)],
+  kura: ["#C98A2B", L("M15 30L32 17l17 13v17H15z", 6.5)],
   en:   ["#D9668C", `<circle cx="25" cy="32" r="12" fill="none" stroke="${W}" stroke-width="5.5"/><circle cx="39" cy="32" r="12" fill="none" stroke="${W}" stroke-width="5.5"/>`],
-  nami: ["#2E9C78", L("M11 26c5-6 9-6 14 0s9 6 14 0 9-6 14 0") + L("M11 40c5-6 9-6 14 0s9 6 14 0 9-6 14 0")],
-  kaze: ["#3E73C2", L("M11 26h26a7 7 0 1 0-7-7") + L("M11 37h32a7 7 0 1 1-7 7") ],
+  nami: ["#2E9C78", F("M12 31c5.3-6 10.7-6 16 0s10.7 6 16 0c3-3.5 5.5-4.5 8-3v20a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4z")],
+  kaze: ["#3E73C2", R(12, 20, 30, 7, 3.5) + R(22, 31, 30, 7, 3.5) + R(12, 42, 20, 7, 3.5)],
 };
 
 // [名前, 上の色, 下の色, 記号, 説明, 無地]
