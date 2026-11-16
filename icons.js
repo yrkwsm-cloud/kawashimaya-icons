@@ -25,6 +25,8 @@ const APP = {
   en:   ["#D9668C", `<circle cx="25" cy="32" r="12" fill="none" stroke="${W}" stroke-width="5.5"/><circle cx="39" cy="32" r="12" fill="none" stroke="${W}" stroke-width="5.5"/>`],
   nami: ["#2E9C78", F("M12 31c5.3-6 10.7-6 16 0s10.7 6 16 0c3-3.5 5.5-4.5 8-3v20a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4z")],
   kaze: ["#3E73C2", R(12, 20, 30, 7, 3.5) + R(22, 31, 30, 7, 3.5) + R(12, 42, 20, 7, 3.5)],
+  // sora＝空（マーケティングダッシュボード）。白く塗った雲（2026-11-17 河島さん「sora のアイコンとファビコンも」）
+  sora: ["#3BA0DC", C(24, 37, 8) + C(35, 30, 12) + C(45, 37, 7.5) + R(16, 35, 37, 10, 5)],
 };
 
 // [名前, 上の色, 下の色, 記号, 説明, 無地]
@@ -33,6 +35,7 @@ const ICONS = [
   ["en", APP.en[0], APP.en[0], APP.en[1], "en（メール配信）", 1],
   ["nami", APP.nami[0], APP.nami[0], APP.nami[1], "nami（発信）", 1],
   ["kaze", APP.kaze[0], APP.kaze[0], APP.kaze[1], "kaze（広告）", 1],
+  ["sora", APP.sora[0], APP.sora[0], APP.sora[1], "sora（マーケ）", 1],
   // ---- PIA 本体と機能（?tab=） ----
   ["pia", APP.pia[0], APP.pia[0], APP.pia[1], "PIA（本体）", 1],
   ["pia-dandori", "#FFAE73", "#FF8A4C", R(13, 16, 38, 34, 7) + R(13, 16, 38, 10, 7, "#FFE2CC") + R(19, 10, 5, 11, 2.5) + R(40, 10, 5, 11, 2.5) + [0, 1, 2].map((i) => [0, 1].map((j) => R(19 + i * 10, 31 + j * 9, 6, 5, 1.5, "#FF8A4C")).join("")).join(""), "スケジュール"],
