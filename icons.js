@@ -29,6 +29,8 @@ const APP = {
   sora: ["#3BA0DC", C(24, 37, 8) + C(35, 30, 12) + C(45, 37, 7.5) + R(16, 35, 37, 10, 5)],
   // umi＝海（海外ダッシュボード）。白く塗った帆船＝海を渡って世界へ（2026-11-17 河島さん「umi のショートカットのアイコンとファビコンを」）。色は切り替えの umi の色
   umi: ["#1F7F99", F("M34 12v27H18z") + F("M38 20l10 19H38z") + F("M13 44h38l-5 8H18z")],
+  // kagi＝鍵（freee登録チェック。Know Accounts, Grow Impact）。白い線の鍵（2026-11-18 河島さん「この鍵のアイコンも作っておいて」）。色は切り替えの色
+  kagi: ["#5B57A6", `<circle cx="24" cy="25" r="10" fill="none" stroke="${W}" stroke-width="6"/>` + S("M31.5 32.5L50 51M42.5 43.5l-5.5 5.5M49 50l-4.5 4.5", 6)],
   // tane＝種（商品企画・売れ筋リサーチ。Trend And Needs Explorer）。白く塗った種から出た芽（2026-11-17 河島さん「同じようにロゴも」）。色は若葉
   tane: ["#7FB23A", S("M32 44V29", 5.5) + F("M32 31c-2-10-10-15-20-14 1 10 9 16 20 14z") + F("M32 27c1-10 9-16 19-15 0 10-8 16-19 15z") + `<ellipse cx="32" cy="47" rx="10" ry="6.5" fill="${W}"/>`],
 };
@@ -42,6 +44,7 @@ const ICONS = [
   ["sora", APP.sora[0], APP.sora[0], APP.sora[1], "sora（マーケ）", 1],
   ["umi", APP.umi[0], APP.umi[0], APP.umi[1], "umi（海外）", 1],
   ["tane", APP.tane[0], APP.tane[0], APP.tane[1], "tane（商品企画）", 1],
+  ["kagi", APP.kagi[0], APP.kagi[0], APP.kagi[1], "kagi（freee登録チェック）", 1],
   // ---- PIA 本体と機能（?tab=） ----
   ["pia", APP.pia[0], APP.pia[0], APP.pia[1], "PIA（本体）", 1],
   ["pia-dandori", "#FFAE73", "#FF8A4C", R(13, 16, 38, 34, 7) + R(13, 16, 38, 10, 7, "#FFE2CC") + R(19, 10, 5, 11, 2.5) + R(40, 10, 5, 11, 2.5) + [0, 1, 2].map((i) => [0, 1].map((j) => R(19 + i * 10, 31 + j * 9, 6, 5, 1.5, "#FF8A4C")).join("")).join(""), "スケジュール"],
